@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 			throw new UnauthorizedException('Token not found');
 		}
 		try {
-			const { user, token: newToken } = await firstValueFrom(this.client.send('auth.verify.user', token));
+			const { user, token: newToken } = await firstValueFrom(this.client.send({ cmd: 'auth.verify.user' }, token));
 
 			request['user'] = user;
 			request['token'] = newToken;
